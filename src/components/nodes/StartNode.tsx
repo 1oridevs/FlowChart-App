@@ -1,5 +1,6 @@
 import { memo } from 'react';
-import { Handle, Position, NodeProps } from 'reactflow';
+import { Handle, Position } from 'reactflow';
+import type { NodeProps } from 'reactflow';
 import { Play } from 'lucide-react';
 
 const StartNode = memo(({ data, selected }: NodeProps) => {
