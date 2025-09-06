@@ -37,6 +37,7 @@ interface FlowchartProps {
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
+  onNodeClick?: (event: React.MouseEvent, node: Node) => void;
 }
 
 const Flowchart: React.FC<FlowchartProps> = ({
@@ -45,6 +46,7 @@ const Flowchart: React.FC<FlowchartProps> = ({
   onNodesChange,
   onEdgesChange,
   onConnect,
+  onNodeClick,
 }) => {
   return (
     <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" style={{ width: '100%', height: '100%' }}>
@@ -54,6 +56,7 @@ const Flowchart: React.FC<FlowchartProps> = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onNodeClick={onNodeClick}
         nodeTypes={nodeTypes}
         fitView
         attributionPosition="bottom-left"
