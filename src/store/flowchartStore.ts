@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { addEdge, applyNodeChanges, applyEdgeChanges, NodeChange, EdgeChange } from 'reactflow';
-import type { Node, Edge, Connection } from 'reactflow';
+import { addEdge, applyNodeChanges, applyEdgeChanges } from 'reactflow';
+import type { Node, Edge, Connection, NodeChange, EdgeChange } from 'reactflow';
 
 export interface FlowchartState {
   nodes: Node[];
