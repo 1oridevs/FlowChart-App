@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   Play, 
   Square, 
-  Diamond, 
   Plus, 
   Save, 
   Download, 
@@ -15,9 +14,15 @@ import {
   Grid,
   Settings,
   Sun,
-  Moon
+  Moon,
+  Globe,
+  Database,
+  Code,
+  Server,
+  GitBranch,
+  Zap
 } from 'lucide-react';
-import { useFlowchartStore } from '../store/flowchartStore';
+import { useFlowchartStore, NodeType } from '../store/flowchartStore';
 
 const Toolbar = () => {
   const { selectedNodeType, setSelectedNodeType, addNode } = useFlowchartStore();
@@ -39,10 +44,14 @@ const Toolbar = () => {
   };
 
   const nodeTypes = [
-    { type: 'start', label: 'Start', icon: Play, color: 'bg-green-500 hover:bg-green-600' },
-    { type: 'process', label: 'Process', icon: Square, color: 'bg-blue-500 hover:bg-blue-600' },
-    { type: 'decision', label: 'Decision', icon: Diamond, color: 'bg-yellow-500 hover:bg-yellow-600' },
-    { type: 'end', label: 'End', icon: Square, color: 'bg-red-500 hover:bg-red-600' },
+    { type: 'start' as NodeType, label: 'Start', icon: Play, color: 'bg-green-500 hover:bg-green-600' },
+    { type: 'api' as NodeType, label: 'API', icon: Globe, color: 'bg-blue-500 hover:bg-blue-600' },
+    { type: 'database' as NodeType, label: 'Database', icon: Database, color: 'bg-green-500 hover:bg-green-600' },
+    { type: 'function' as NodeType, label: 'Function', icon: Code, color: 'bg-purple-500 hover:bg-purple-600' },
+    { type: 'service' as NodeType, label: 'Service', icon: Server, color: 'bg-orange-500 hover:bg-orange-600' },
+    { type: 'condition' as NodeType, label: 'Condition', icon: GitBranch, color: 'bg-yellow-500 hover:bg-yellow-600' },
+    { type: 'event' as NodeType, label: 'Event', icon: Zap, color: 'bg-red-500 hover:bg-red-600' },
+    { type: 'end' as NodeType, label: 'End', icon: Square, color: 'bg-gray-500 hover:bg-gray-600' },
   ];
 
   const handleAddNode = () => {

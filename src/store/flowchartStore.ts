@@ -2,16 +2,18 @@ import { create } from 'zustand';
 import { addEdge, applyNodeChanges, applyEdgeChanges } from 'reactflow';
 import type { Node, Edge, Connection, NodeChange, EdgeChange } from 'reactflow';
 
+export type NodeType = 'api' | 'database' | 'function' | 'service' | 'condition' | 'event' | 'start' | 'end';
+
 export interface FlowchartState {
   nodes: Node[];
   edges: Edge[];
-  selectedNodeType: string;
+  selectedNodeType: NodeType;
   setNodes: (nodes: Node[]) => void;
   setEdges: (edges: Edge[]) => void;
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
-  setSelectedNodeType: (type: string) => void;
+  setSelectedNodeType: (type: NodeType) => void;
   addNode: (node: Omit<Node, 'id'>) => void;
   clearFlowchart: () => void;
 }
@@ -22,11 +24,11 @@ export const useFlowchartStore = create<FlowchartState>((set, get) => ({
       id: '1',
       type: 'start',
       position: { x: 100, y: 100 },
-      data: { label: 'Start' },
+      data: { label: 'System Start' },
     },
   ],
   edges: [],
-  selectedNodeType: 'process',
+  selectedNodeType: 'api',
   
   setNodes: (nodes) => set({ nodes }),
   setEdges: (edges) => set({ edges }),
