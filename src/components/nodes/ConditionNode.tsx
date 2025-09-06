@@ -5,7 +5,7 @@ import { GitBranch, ArrowRight } from 'lucide-react';
 
 const ConditionNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <div className={`px-6 py-4 shadow-xl rounded-2xl bg-gradient-to-br from-yellow-500 via-yellow-600 to-yellow-700 text-white border-2 border-yellow-800 min-w-[160px] max-w-[200px] transition-all duration-300 group ${
+    <div className={`px-6 py-4 shadow-xl rounded-2xl bg-gradient-to-br from-yellow-500 via-yellow-600 to-yellow-700 text-white border-2 border-yellow-800 min-w-[180px] max-w-[220px] transition-all duration-300 group ${
       selected ? 'ring-4 ring-yellow-300 shadow-2xl scale-105 border-yellow-400' : 'hover:shadow-2xl hover:scale-105 hover:border-yellow-400'
     }`}>
       <div className="flex items-center justify-center gap-2 mb-2">

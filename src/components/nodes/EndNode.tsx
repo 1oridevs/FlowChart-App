@@ -5,7 +5,7 @@ import { Square } from 'lucide-react';
 
 const EndNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <div className={`px-8 py-6 shadow-xl rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white border-2 border-red-800 min-w-[140px] max-w-[180px] transition-all duration-300 group ${
+    <div className={`px-8 py-6 shadow-xl rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white border-2 border-red-800 min-w-[160px] max-w-[200px] transition-all duration-300 group ${
       selected ? 'ring-4 ring-red-300 shadow-2xl scale-105 border-red-400' : 'hover:shadow-2xl hover:scale-105 hover:border-red-400'
     }`}>
       <div className="flex items-center justify-center gap-2">

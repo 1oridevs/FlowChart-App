@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Command, Shift } from 'lucide-react';
+import { X, Command } from 'lucide-react';
 
 interface KeyboardShortcutsModalProps {
   isOpen: boolean;
@@ -39,7 +39,7 @@ const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({ isOpen,
       return <Command className="w-3 h-3" />;
     }
     if (key === 'Shift') {
-      return <Shift className="w-3 h-3" />;
+      return <span className="text-xs font-bold">⇧</span>;
     }
     return <span className="text-xs font-mono">{key}</span>;
   };

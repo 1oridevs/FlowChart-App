@@ -112,10 +112,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
     <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 px-6 py-4 shadow-lg">
       <div className="flex items-center justify-between">
         {/* Left side - Node tools */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Add Node:</span>
-            <div className="flex gap-1">
+            <div className="flex gap-2 flex-wrap">
               {nodeTypes.map(({ type, label, icon: Icon, color }) => (
                 <button
                   key={type}
@@ -138,7 +138,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
           
           <button
             onClick={handleAddNode}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap"
             title="Add selected node to canvas"
           >
             <Plus size={16} />
@@ -147,8 +147,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
         </div>
 
         {/* Right side - Actions */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               title="Undo"
@@ -165,7 +165,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
           
           <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
           
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <button
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               title="Zoom In"
@@ -188,21 +188,25 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
           
           <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
           
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          >
-            {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+            
+            <button
+              onClick={onShowShortcuts}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              title="Keyboard Shortcuts"
+            >
+              <HelpCircle size={16} />
+            </button>
+          </div>
           
-          <button
-            onClick={onShowShortcuts}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-            title="Keyboard Shortcuts"
-          >
-            <HelpCircle size={16} />
-          </button>
+          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
           
           <div className="flex items-center gap-2">
             <input

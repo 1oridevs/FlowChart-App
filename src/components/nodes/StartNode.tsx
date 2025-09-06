@@ -5,7 +5,7 @@ import { Play } from 'lucide-react';
 
 const StartNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <div className={`px-8 py-6 shadow-xl rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 text-white border-2 border-green-800 min-w-[140px] max-w-[180px] transition-all duration-300 group ${
+    <div className={`px-8 py-6 shadow-xl rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 text-white border-2 border-green-800 min-w-[160px] max-w-[200px] transition-all duration-300 group ${
       selected ? 'ring-4 ring-green-300 shadow-2xl scale-105 border-green-400' : 'hover:shadow-2xl hover:scale-105 hover:border-green-400'
     }`}>
       <div className="flex items-center justify-center gap-2">
