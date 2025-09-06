@@ -6,12 +6,12 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  Connection,
   Edge,
   Node,
   NodeChange,
   EdgeChange,
 } from 'reactflow';
+import type { Connection } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import StartNode from './nodes/StartNode';
