@@ -50,26 +50,49 @@ const Flowchart: React.FC<FlowchartProps> = ({
 }) => {
   return (
     <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" style={{ width: '100%', height: '100%' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onNodeClick={onNodeClick}
-        nodeTypes={nodeTypes}
-        fitView
-        attributionPosition="bottom-left"
-        defaultEdgeOptions={{
-          style: { strokeWidth: 3, stroke: '#4f46e5' },
-          type: 'smoothstep',
-        }}
-        connectionLineStyle={{ strokeWidth: 3, stroke: '#3b82f6' }}
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onNodeClick={onNodeClick}
+          nodeTypes={nodeTypes}
+          fitView
+          attributionPosition="bottom-left"
+          snapToGrid={true}
+          snapGrid={[20, 20]}
+          nodesDraggable={true}
+          nodesConnectable={true}
+          elementsSelectable={true}
+          defaultEdgeOptions={{
+            style: { 
+              strokeWidth: 2, 
+              stroke: '#6366f1',
+              strokeDasharray: '0',
+            },
+            type: 'smoothstep',
+            animated: false,
+            markerEnd: {
+              type: 'arrowclosed',
+              color: '#6366f1',
+              width: 20,
+              height: 20,
+            },
+          }}
+          connectionLineStyle={{ 
+            strokeWidth: 2, 
+            stroke: '#3b82f6',
+            strokeDasharray: '5,5',
+          }}
         style={{ width: '100%', height: '100%' }}
       >
         <Controls 
           className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl"
           showInteractive={false}
+          showZoom={true}
+          showFitView={true}
+          position="top-right"
         />
                <MiniMap
                  className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl"
@@ -90,10 +113,10 @@ const Flowchart: React.FC<FlowchartProps> = ({
                />
         <Background 
           variant="dots" 
-          gap={25} 
-          size={1.2} 
+          gap={20} 
+          size={1} 
           color="#a5b4fc"
-          className="opacity-30"
+          className="opacity-40"
         />
       </ReactFlow>
     </div>

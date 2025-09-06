@@ -66,14 +66,41 @@ const Toolbar = () => {
 
   const handleExport = () => {
     const { nodes, edges } = useFlowchartStore.getState();
-    const data = { nodes, edges };
+    const data = { 
+      nodes, 
+      edges,
+      metadata: {
+        version: '1.0',
+        created: new Date().toISOString(),
+        type: 'developer-flowchart'
+      }
+    };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'flowchart.json';
+    a.download = `flowchart-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target?.result as string);
+          if (data.nodes && data.edges) {
+            useFlowchartStore.getState().setNodes(data.nodes);
+            useFlowchartStore.getState().setEdges(data.edges);
+          }
+        } catch (error) {
+          console.error('Error importing file:', error);
+        }
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
@@ -164,14 +191,31 @@ const Toolbar = () => {
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           
-          <button
-            onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md hover:shadow-lg"
-            title="Export flowchart"
-          >
-            <Download size={16} />
-            Export
-          </button>
+          <div className="flex items-center gap-2">
+            <input
+              type="file"
+              accept=".json"
+              onChange={handleImport}
+              className="hidden"
+              id="import-file"
+            />
+            <label
+              htmlFor="import-file"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer"
+              title="Import flowchart"
+            >
+              <Upload size={16} />
+              Import
+            </label>
+            <button
+              onClick={handleExport}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md hover:shadow-lg"
+              title="Export flowchart"
+            >
+              <Download size={16} />
+              Export
+            </button>
+          </div>
         </div>
       </div>
     </div>
