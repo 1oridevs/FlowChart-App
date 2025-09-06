@@ -36,11 +36,11 @@ const FlowchartPage = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
+    <div className="h-screen flex flex-col">
       <Toolbar onShowShortcuts={() => setShowShortcuts(true)} />
-      <div className="flex-1 flex" style={{ height: 'calc(100vh - 144px)' }}>
+      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
         <Sidebar />
-        <div className="flex-1 relative" style={{ height: '100%' }}>
+        <div className="flex-1 relative">
           <Flowchart
             nodes={nodes}
             edges={edges}
@@ -51,11 +51,13 @@ const FlowchartPage = () => {
           />
         </div>
         {showProperties && selectedNode && (
-          <NodePropertiesPanel
-            selectedNode={selectedNode}
-            onUpdateNode={handleUpdateNode}
-            onClose={handleCloseProperties}
-          />
+          <div className="w-full sm:w-auto">
+            <NodePropertiesPanel
+              selectedNode={selectedNode}
+              onUpdateNode={handleUpdateNode}
+              onClose={handleCloseProperties}
+            />
+          </div>
         )}
       </div>
       

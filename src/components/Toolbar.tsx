@@ -114,18 +114,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
   };
 
   return (
-    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 px-6 py-4 shadow-lg">
-      <div className="flex items-center justify-between">
+    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 px-4 sm:px-6 py-3 sm:py-4 shadow-lg">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         {/* Left side - Node tools */}
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6">
           {/* Node Type Selector */}
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Node Type:</span>
-            <div className="relative">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">Node Type:</span>
+            <div className="relative w-full sm:w-auto">
               <select
                 value={selectedNodeType}
                 onChange={(e) => setSelectedNodeType(e.target.value as NodeType)}
-                className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 min-w-[160px] cursor-pointer"
+                className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 pl-10 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 w-full sm:min-w-[160px] cursor-pointer"
               >
                 {nodeTypes.map(({ type, label }) => (
                   <option key={type} value={type}>
@@ -149,12 +149,12 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
             </div>
           </div>
           
-          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
+          <div className="hidden sm:block h-6 w-px bg-gray-300 dark:bg-gray-600" />
           
           {/* Add Node Button */}
           <button
             onClick={handleAddNode}
-            className={`flex items-center gap-2 px-6 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ${
+            className={`flex items-center justify-center gap-2 px-4 sm:px-6 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium text-sm sm:text-base whitespace-nowrap ${
               showAddSuccess 
                 ? 'bg-gradient-to-r from-green-600 to-green-700 text-white' 
                 : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
@@ -163,22 +163,24 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
           >
             {showAddSuccess ? (
               <>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                Added!
+                <span className="hidden sm:inline">Added!</span>
+                <span className="sm:hidden">✓</span>
               </>
             ) : (
               <>
-                <Plus size={18} />
-                Add Node
+                <Plus size={16} className="sm:w-[18px] sm:h-[18px]" />
+                <span className="hidden sm:inline">Add Node</span>
+                <span className="sm:hidden">Add</span>
               </>
             )}
           </button>
         </div>
 
         {/* Right side - Actions */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
           {/* Edit Actions */}
           <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             <button
@@ -247,19 +249,19 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
             />
             <label
               htmlFor="import-file"
-              className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer font-medium"
+              className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer font-medium text-sm sm:text-base whitespace-nowrap"
               title="Import flowchart"
             >
               <Upload size={16} />
-              Import
+              <span className="hidden sm:inline">Import</span>
             </label>
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
+              className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium text-sm sm:text-base whitespace-nowrap"
               title="Export flowchart"
             >
               <Download size={16} />
-              Export
+              <span className="hidden sm:inline">Export</span>
             </button>
           </div>
         </div>

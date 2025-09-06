@@ -54,7 +54,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-80 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-r border-gray-200/50 dark:border-gray-700/50 flex flex-col shadow-xl">
+    <div className="w-full sm:w-80 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-r border-gray-200/50 dark:border-gray-700/50 flex flex-col shadow-xl">
       {/* Header */}
       <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <h2 className="text-xl font-bold">Flowchart Mapper</h2>

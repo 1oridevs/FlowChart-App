@@ -187,7 +187,7 @@ const NodePropertiesPanel: React.FC<NodePropertiesPanelProps> = ({
   };
 
   return (
-    <div className="w-80 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-l border-gray-200/50 dark:border-gray-700/50 flex flex-col shadow-xl">
+    <div className="w-full sm:w-80 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-l border-gray-200/50 dark:border-gray-700/50 flex flex-col shadow-xl">
       {/* Header */}
       <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="flex items-center justify-between">
