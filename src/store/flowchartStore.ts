@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { addEdge, applyNodeChanges, applyEdgeChanges } from 'reactflow';
 import type { Node, Edge, Connection, NodeChange, EdgeChange } from 'reactflow';
-
-export type NodeType = 'api' | 'database' | 'function' | 'service' | 'condition' | 'event' | 'start' | 'end';
+import type { NodeType } from '../types';
 
 export interface FlowchartState {
   nodes: Node[];

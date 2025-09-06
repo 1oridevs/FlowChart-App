@@ -22,7 +22,8 @@ import {
   GitBranch,
   Zap
 } from 'lucide-react';
-import { useFlowchartStore, NodeType } from '../store/flowchartStore';
+import { useFlowchartStore } from '../store/flowchartStore';
+import type { NodeType } from '../types';
 
 const Toolbar = () => {
   const { selectedNodeType, setSelectedNodeType, addNode } = useFlowchartStore();

@@ -8,6 +8,7 @@ import ReactFlow, {
   addEdge,
 } from 'reactflow';
 import type { Node, Edge, Connection, NodeChange, EdgeChange } from 'reactflow';
+import type { NodeType } from '../types';
 import 'reactflow/dist/style.css';
 
 import StartNode from './nodes/StartNode';
