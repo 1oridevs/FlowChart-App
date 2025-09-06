@@ -20,12 +20,17 @@ import {
   Code,
   Server,
   GitBranch,
-  Zap
+  Zap,
+  HelpCircle
 } from 'lucide-react';
 import { useFlowchartStore } from '../store/flowchartStore';
 import type { NodeType } from '../types';
 
-const Toolbar = () => {
+interface ToolbarProps {
+  onShowShortcuts?: () => void;
+}
+
+const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
   const { selectedNodeType, setSelectedNodeType, addNode } = useFlowchartStore();
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
@@ -189,6 +194,14 @@ const Toolbar = () => {
             title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          
+          <button
+            onClick={onShowShortcuts}
+            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            title="Keyboard Shortcuts"
+          >
+            <HelpCircle size={16} />
           </button>
           
           <div className="flex items-center gap-2">

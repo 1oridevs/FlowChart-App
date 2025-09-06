@@ -4,12 +4,18 @@ import Toolbar from '../components/Toolbar';
 import Flowchart from '../components/Flowchart';
 import Sidebar from '../components/Sidebar';
 import NodePropertiesPanel from '../components/NodePropertiesPanel';
+import KeyboardShortcutsModal from '../components/KeyboardShortcutsModal';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import type { Node } from 'reactflow';
 
 const FlowchartPage = () => {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, setNodes } = useFlowchartStore();
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [showProperties, setShowProperties] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+
+  // Enable keyboard shortcuts
+  useKeyboardShortcuts();
 
   const handleNodeClick = (event: React.MouseEvent, node: Node) => {
     setSelectedNode(node);
@@ -31,7 +37,7 @@ const FlowchartPage = () => {
 
   return (
     <div className="h-screen flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
-      <Toolbar />
+      <Toolbar onShowShortcuts={() => setShowShortcuts(true)} />
       <div className="flex-1 flex" style={{ height: 'calc(100vh - 144px)' }}>
         <Sidebar />
         <div className="flex-1 relative" style={{ height: '100%' }}>
@@ -52,6 +58,12 @@ const FlowchartPage = () => {
           />
         )}
       </div>
+      
+      {/* Keyboard Shortcuts Modal */}
+      <KeyboardShortcutsModal
+        isOpen={showShortcuts}
+        onClose={() => setShowShortcuts(false)}
+      />
     </div>
   );
 };
