@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   Play, 
   Square, 
@@ -12,12 +13,30 @@ import {
   ZoomOut,
   RotateCcw,
   Grid,
-  Settings
+  Settings,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { useFlowchartStore } from '../store/flowchartStore';
 
 const Toolbar = () => {
   const { selectedNodeType, setSelectedNodeType, addNode } = useFlowchartStore();
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
+
+  React.useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(isDark);
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   const nodeTypes = [
     { type: 'start', label: 'Start', icon: Play, color: 'bg-green-500 hover:bg-green-600' },
@@ -48,7 +67,7 @@ const Toolbar = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4 shadow-sm">
+    <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 px-6 py-4 shadow-lg">
       <div className="flex items-center justify-between">
         {/* Left side - Node tools */}
         <div className="flex items-center gap-4">
@@ -126,6 +145,14 @@ const Toolbar = () => {
           </div>
           
           <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
+          
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
           
           <button
             onClick={handleExport}

@@ -9,7 +9,7 @@ function App() {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useFlowchartStore();
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <Toolbar />
       <div className="flex-1 flex">
         <Sidebar />

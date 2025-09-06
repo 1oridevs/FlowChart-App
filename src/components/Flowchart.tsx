@@ -38,7 +38,7 @@ const Flowchart: React.FC<FlowchartProps> = ({
   onConnect,
 }) => {
   return (
-    <div className="w-full h-full bg-gray-50 dark:bg-gray-900">
+    <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -49,18 +49,18 @@ const Flowchart: React.FC<FlowchartProps> = ({
         fitView
         attributionPosition="bottom-left"
         defaultEdgeOptions={{
-          style: { strokeWidth: 2, stroke: '#6b7280' },
+          style: { strokeWidth: 3, stroke: '#4f46e5' },
           type: 'smoothstep',
         }}
-        connectionLineStyle={{ strokeWidth: 2, stroke: '#3b82f6' }}
-        className="bg-gray-50 dark:bg-gray-900"
+        connectionLineStyle={{ strokeWidth: 3, stroke: '#3b82f6' }}
+        className="bg-transparent"
       >
         <Controls 
-          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl"
           showInteractive={false}
         />
         <MiniMap 
-          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl"
           nodeColor={(node) => {
             switch (node.type) {
               case 'start': return '#10b981';
@@ -74,10 +74,10 @@ const Flowchart: React.FC<FlowchartProps> = ({
         />
         <Background 
           variant="dots" 
-          gap={20} 
-          size={1.5} 
-          color="#e5e7eb"
-          className="opacity-50"
+          gap={25} 
+          size={1.2} 
+          color="#a5b4fc"
+          className="opacity-30"
         />
       </ReactFlow>
     </div>
