@@ -57,7 +57,7 @@ const Home = () => {
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
               Flowchart
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Mapper</span>
+              <span className="gradient-text"> Mapper</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
               Create beautiful, interactive flowcharts with our modern, intuitive design tools. 
@@ -66,14 +66,14 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/flowchart"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="btn-primary inline-flex items-center gap-2 px-8 py-4"
               >
                 Start Creating
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 to="/templates"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl backdrop-blur-sm"
+                className="btn-secondary inline-flex items-center gap-2 px-8 py-4"
               >
                 Browse Templates
                 <FileText className="w-5 h-5" />
@@ -98,7 +98,7 @@ const Home = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="p-6 bg-white/80 dark:bg-gray-800/80 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50"
+                className="card p-6"
               >
                 <div className="mb-4">
                   {feature.icon}
