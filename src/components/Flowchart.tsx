@@ -38,7 +38,7 @@ const Flowchart: React.FC<FlowchartProps> = ({
   onConnect,
 }) => {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" style={{ width: '100%', height: '100%' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -53,7 +53,7 @@ const Flowchart: React.FC<FlowchartProps> = ({
           type: 'smoothstep',
         }}
         connectionLineStyle={{ strokeWidth: 3, stroke: '#3b82f6' }}
-        className="bg-transparent"
+        style={{ width: '100%', height: '100%' }}
       >
         <Controls 
           className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl"

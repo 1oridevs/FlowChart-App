@@ -9,11 +9,11 @@ function App() {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useFlowchartStore();
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" style={{ height: '100vh' }}>
       <Toolbar />
-      <div className="flex-1 flex">
+      <div className="flex-1 flex" style={{ height: 'calc(100vh - 80px)' }}>
         <Sidebar />
-        <div className="flex-1 relative">
+        <div className="flex-1 relative" style={{ height: '100%' }}>
           <ReactFlowProvider>
             <Flowchart
               nodes={nodes}
