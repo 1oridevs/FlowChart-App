@@ -5,29 +5,36 @@ import { Server, ArrowRight } from 'lucide-react';
 
 const ServiceNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <div className={`px-6 py-4 shadow-lg rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white border-2 border-orange-700 min-w-[140px] transition-all duration-200 ${
-      selected ? 'ring-4 ring-orange-300 shadow-2xl scale-105' : 'hover:shadow-xl hover:scale-102'
+    <div className={`px-6 py-4 shadow-xl rounded-2xl bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white border-2 border-orange-800 min-w-[160px] max-w-[200px] transition-all duration-300 group ${
+      selected ? 'ring-4 ring-orange-300 shadow-2xl scale-105 border-orange-400' : 'hover:shadow-2xl hover:scale-105 hover:border-orange-400'
     }`}>
-      <div className="flex items-center justify-center gap-2">
-        <Server size={18} className="fill-white" />
-        <div className="font-semibold text-sm">{data.label || 'Service'}</div>
+      <div className="flex items-center justify-center gap-2 mb-2">
+        <div className="p-1 bg-white/20 rounded-lg">
+          <Server size={16} className="fill-white" />
+        </div>
+        <div className="font-bold text-sm">{data.label || 'Service'}</div>
       </div>
       {data.description && (
-        <div className="text-xs text-orange-100 mt-1 text-center">
+        <div className="text-xs text-orange-100 mb-2 text-center leading-relaxed">
           {data.description}
+        </div>
+      )}
+      {data.status && (
+        <div className="text-xs bg-white/20 px-2 py-1 rounded-full text-center font-mono">
+          {data.status}
         </div>
       )}
       <Handle
         type="target"
         position={Position.Top}
-        className="w-4 h-4 bg-orange-700 border-2 border-white"
-        style={{ top: -8 }}
+        className="w-3 h-3 bg-orange-800 border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ top: -6 }}
       />
       <Handle
         type="source"
         position={Position.Bottom}
-        className="w-4 h-4 bg-orange-700 border-2 border-white"
-        style={{ bottom: -8 }}
+        className="w-3 h-3 bg-orange-800 border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ bottom: -6 }}
       />
     </div>
   );

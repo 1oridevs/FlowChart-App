@@ -5,18 +5,20 @@ import { Square } from 'lucide-react';
 
 const EndNode = memo(({ data, selected }: NodeProps) => {
   return (
-    <div className={`px-6 py-4 shadow-lg rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white border-2 border-red-700 min-w-[120px] transition-all duration-200 ${
-      selected ? 'ring-4 ring-red-300 shadow-2xl scale-105' : 'hover:shadow-xl hover:scale-102'
+    <div className={`px-8 py-6 shadow-xl rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white border-2 border-red-800 min-w-[140px] max-w-[180px] transition-all duration-300 group ${
+      selected ? 'ring-4 ring-red-300 shadow-2xl scale-105 border-red-400' : 'hover:shadow-2xl hover:scale-105 hover:border-red-400'
     }`}>
       <div className="flex items-center justify-center gap-2">
-        <Square size={18} className="fill-white" />
-        <div className="font-semibold text-sm">{data.label}</div>
+        <div className="p-1 bg-white/20 rounded-full">
+          <Square size={16} className="fill-white" />
+        </div>
+        <div className="font-bold text-sm">{data.label || 'End'}</div>
       </div>
       <Handle
         type="target"
         position={Position.Top}
-        className="w-4 h-4 bg-red-700 border-2 border-white"
-        style={{ top: -8 }}
+        className="w-3 h-3 bg-red-800 border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity"
+        style={{ top: -6 }}
       />
     </div>
   );
