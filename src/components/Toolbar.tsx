@@ -33,6 +33,7 @@ interface ToolbarProps {
 const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
   const { selectedNodeType, setSelectedNodeType, addNode } = useFlowchartStore();
   const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const [showAddSuccess, setShowAddSuccess] = React.useState(false);
 
   React.useEffect(() => {
     const isDark = document.documentElement.classList.contains('dark');
@@ -67,6 +68,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
       data: { label: `${selectedNodeType.charAt(0).toUpperCase() + selectedNodeType.slice(1)} Node` },
     };
     addNode(nodeData);
+    
+    // Show success feedback
+    setShowAddSuccess(true);
+    setTimeout(() => setShowAddSuccess(false), 2000);
   };
 
   const handleExport = () => {
@@ -113,82 +118,107 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
       <div className="flex items-center justify-between">
         {/* Left side - Node tools */}
         <div className="flex items-center gap-6">
+          {/* Node Type Selector */}
           <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Add Node:</span>
-            <div className="flex gap-2 flex-wrap">
-              {nodeTypes.map(({ type, label, icon: Icon, color }) => (
-                <button
-                  key={type}
-                  onClick={() => setSelectedNodeType(type)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    selectedNodeType === type
-                      ? `${color} text-white shadow-lg transform scale-105`
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                  }`}
-                  title={`Add ${label} Node`}
-                >
-                  <Icon size={16} />
-                  {label}
-                </button>
-              ))}
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Node Type:</span>
+            <div className="relative">
+              <select
+                value={selectedNodeType}
+                onChange={(e) => setSelectedNodeType(e.target.value as NodeType)}
+                className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 min-w-[160px] cursor-pointer"
+              >
+                {nodeTypes.map(({ type, label }) => (
+                  <option key={type} value={type}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+              {/* Selected node type icon indicator */}
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                {(() => {
+                  const selectedNode = nodeTypes.find(node => node.type === selectedNodeType);
+                  const Icon = selectedNode?.icon;
+                  return Icon ? <Icon size={16} className="text-gray-500" /> : null;
+                })()}
+              </div>
             </div>
           </div>
           
           <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
           
+          {/* Add Node Button */}
           <button
             onClick={handleAddNode}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg whitespace-nowrap"
+            className={`flex items-center gap-2 px-6 py-2 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium ${
+              showAddSuccess 
+                ? 'bg-gradient-to-r from-green-600 to-green-700 text-white' 
+                : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800'
+            }`}
             title="Add selected node to canvas"
           >
-            <Plus size={16} />
-            Add Node
+            {showAddSuccess ? (
+              <>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Added!
+              </>
+            ) : (
+              <>
+                <Plus size={18} />
+                Add Node
+              </>
+            )}
           </button>
         </div>
 
         {/* Right side - Actions */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
+          {/* Edit Actions */}
+          <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             <button
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition-colors"
               title="Undo"
             >
               <Undo size={16} />
             </button>
             <button
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition-colors"
               title="Redo"
             >
               <Redo size={16} />
             </button>
           </div>
           
-          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
-          
-          <div className="flex items-center gap-2">
+          {/* View Controls */}
+          <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
             <button
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition-colors"
               title="Zoom In"
             >
               <ZoomIn size={16} />
             </button>
             <button
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition-colors"
               title="Zoom Out"
             >
               <ZoomOut size={16} />
             </button>
             <button
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-600 transition-colors"
               title="Reset View"
             >
               <RotateCcw size={16} />
             </button>
           </div>
           
-          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
-          
-          <div className="flex items-center gap-2">
+          {/* Settings & Help */}
+          <div className="flex items-center gap-1">
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -206,8 +236,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
             </button>
           </div>
           
-          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600" />
-          
+          {/* File Actions */}
           <div className="flex items-center gap-2">
             <input
               type="file"
@@ -218,7 +247,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
             />
             <label
               htmlFor="import-file"
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer font-medium"
               title="Import flowchart"
             >
               <Upload size={16} />
@@ -226,7 +255,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ onShowShortcuts }) => {
             </label>
             <button
               onClick={handleExport}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 font-medium"
               title="Export flowchart"
             >
               <Download size={16} />
